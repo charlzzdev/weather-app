@@ -3,9 +3,31 @@ body {
   padding: 0;
 }
 
+.card .card-reveal{
+      top: 99%;
+}
+
+::-webkit-scrollbar {
+      width: 2px;
+}
+
+::-webkit-scrollbar-track {
+      background: none; 
+}
+
+::-webkit-scrollbar-thumb {
+      background: #555; 
+}
+
 @media (min-width: 992px){
       .card{
             width: 400px;
             margin: 20px auto;
+      }
+}
+
+@media (max-width: 992px){
+      .btn{
+            width: 100%;
       }
 }

@@ -4,12 +4,14 @@ import SearchResults from './SearchResults';
 class Search extends Component{
       state = {
             city: null,
-            cityData: {}
+            cityData: {},
+            forecast_ready: false
       }
 
       cityInputChanged = (e) => {
             this.setState({
-                  city: e.target.value
+                  city: e.target.value,
+                  forecast_ready: false
             });
       }
 
@@ -21,7 +23,7 @@ class Search extends Component{
             let info = document.querySelector('#info');
 
             if(zipRegex.test(this.state.city) === true) {
-                  fetch(`http://api.openweathermap.org/data/2.5/weather?zip=${this.state.city}&appid=5be44980ca68a407fbce5803b86b4188`)
+                  fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${this.state.city}&appid=5be44980ca68a407fbce5803b86b4188`)
                         .then(response => response.json())
                         .then(data => {
                               if(data.cod !== 200){
@@ -31,7 +33,7 @@ class Search extends Component{
                               }
                         });
             } else if(cityRegex.test(this.state.city) === true) {
-                  fetch(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&appid=5be44980ca68a407fbce5803b86b4188`)
+                  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&appid=5be44980ca68a407fbce5803b86b4188`)
                         .then(response => response.json())
                         .then(data => {
                               if(data.cod !== 200){
@@ -43,6 +45,10 @@ class Search extends Component{
             } else {
                   info.innerHTML = 'The entered city/zip is invalid.';
             };
+
+            this.setState({
+                  forecast_ready: true
+            });
       }
 
       getWeather = (data, info) => {
@@ -62,6 +68,7 @@ class Search extends Component{
                         visibility: data.visibility,
                         weather: data.weather[0].main,
                         weatherDesc: data.weather[0].description,
+                        icon: "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png",
                         windDeg: data.wind.deg,
                         windSpeed: data.wind.speed
                   }
@@ -80,7 +87,7 @@ class Search extends Component{
                               </div>
                               <button className="btn waves-effect waves-light">Submit</button>
                         </form>
-                        <SearchResults cityData={this.state.cityData}/>
+                        <SearchResults cityData={this.state.cityData} forecast_ready={this.state.forecast_ready} cityName={this.state.city}/>
                   </div>
             )
       }
