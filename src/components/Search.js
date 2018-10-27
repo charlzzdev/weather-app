@@ -5,14 +5,21 @@ class Search extends Component{
       state = {
             city: null,
             cityData: {},
-            forecast_ready: false
+            readyToUpdate: false
       }
 
       cityInputChanged = (e) => {
-            this.setState({
-                  city: e.target.value,
-                  forecast_ready: false
-            });
+            let submitBtn = document.querySelector('#submitBtn');
+
+            if(e.target.value !== ''){
+                  submitBtn.className = 'btn waves-effect waves-light';
+                  this.setState({
+                        city: e.target.value,
+                        readyToUpdate: false
+                  });
+            } else {
+                  submitBtn.className = 'btn waves-effect waves-light disabled';
+            }
       }
 
       cityInputSubmitted = (e) => {
@@ -47,7 +54,7 @@ class Search extends Component{
             };
 
             this.setState({
-                  forecast_ready: true
+                  readyToUpdate: true
             });
       }
 
@@ -85,9 +92,9 @@ class Search extends Component{
                                     <input type="text" id="city" onChange={this.cityInputChanged}/>
                                     <span className="helper-text red-text" id="info"></span>
                               </div>
-                              <button className="btn waves-effect waves-light">Submit</button>
+                              <button className="btn waves-effect waves-light disabled" id="submitBtn">Submit</button>
                         </form>
-                        <SearchResults cityData={this.state.cityData} forecast_ready={this.state.forecast_ready} cityName={this.state.city}/>
+                        <SearchResults cityData={this.state.cityData} readyToUpdate={this.state.readyToUpdate} cityName={this.state.city}/>
                   </div>
             )
       }

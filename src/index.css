@@ -7,6 +7,10 @@ body {
       top: 99%;
 }
 
+.card .card-title.activator{
+      text-shadow: 0 0 2px #111;
+}
+
 ::-webkit-scrollbar {
       width: 2px;
 }

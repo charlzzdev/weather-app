@@ -1,5 +1,6 @@
 import React from 'react';
 import Forecast from './Forecast';
+import BGImage from './BGImage';
 
 const SearchResults = (props) => {
       return(
@@ -8,9 +9,9 @@ const SearchResults = (props) => {
                         props.cityData.name !== undefined ? (
                               <div className="card">
                                     <div className="card-image">
-                                          <img src="https://www.cray.com/blog/wp-content/uploads/2015/09/Weather-Blog-Image.jpg" alt=""/>
-                                          <span className="card-title activator">{props.cityData.name}, <strong>{props.cityData.country}</strong> ({props.cityData.lat}, {props.cityData.lon})</span>
-                                          <button className="btn-floating halfway-fab waves-effect waves-light activator"><i>F</i></button>
+                                          <BGImage cityName={props.cityName} readyToUpdate={props.readyToUpdate}/>
+                                          <span className="card-title activator">{props.cityData.name}, <strong className="activator">{props.cityData.country}</strong> ({props.cityData.lat}, {props.cityData.lon})</span>
+                                          <button className="btn-floating halfway-fab waves-effect waves-light activator">▲</button>
                                     </div>
                                     <div className="card-content">
                                           <img src={props.cityData.icon} alt=""/>
@@ -31,7 +32,7 @@ const SearchResults = (props) => {
                                     </div>
                                     <div className="card-reveal">
                                           <span className="card-title">Forecast</span>
-                                          <Forecast forecast_ready={props.forecast_ready} cityName={props.cityName}/>
+                                          <Forecast readyToUpdate={props.readyToUpdate} cityName={props.cityName}/>
                                     </div>
                               </div>
                         ) : (null)
