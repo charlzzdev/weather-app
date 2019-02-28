@@ -1,6 +1,6 @@
 {
   "name": "weather-app",
-  "homepage": "https://charleseller.dev/weather-app",
+  "homepage": "https://weather.charleseller.dev",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
